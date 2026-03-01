@@ -5,9 +5,9 @@ pipeline {
 
         stage('Clone Code') {
             steps {
-                echo: "Start Cloning the Code"
+                echo "Start Cloning the Code"
                 git url: "https://github.com/KetanKumar3/GoKart-Web-CICD-Deployment.git", branch: "main"
-                echo: "Complete Cloning the Code"
+                echo "Complete Cloning the Code"
             }
         }
 
@@ -19,17 +19,17 @@ pipeline {
 
         stage('Build Images') {
             steps {
-                echo: "Building the image"
+                echo "Building the image"
                 sh 'docker compose build'
-                echo: "Build image successfully"
+                echo "Build image successfully"
             }
         }
 
         stage('Deploy Containers') {
             steps {
-                echo: "Deploying Start"
+                echo "Deploying Start"
                 sh 'docker compose up -d'
-                echo: "Deploying End"
+                echo "Deploying End"
             }
         }
     }
