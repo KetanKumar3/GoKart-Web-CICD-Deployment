@@ -17,6 +17,16 @@ pipeline {
             }
         }
 
+        stage('Inject ENV File') {
+            steps {
+                withCredentials([file(credentialsId: 'backend-env', variable: 'ENV_FILE')]) {
+                    sh '''
+                        cp $ENV_FILE backend/.env
+                    '''
+                }
+            }
+        }
+
         stage('Build Images') {
             steps {
                 echo "Building the image"
