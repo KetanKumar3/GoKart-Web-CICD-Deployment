@@ -57,7 +57,7 @@ const Dashboard = () => {
     formData.append("price", addelement.price);
 
     try {
-      const res = await fetch("http://localhost:3000/product/add", {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/product/add`, {
         method: "POST",
         body: formData,
       });
@@ -90,7 +90,7 @@ const Dashboard = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:3000/product/remove", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/product/remove`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

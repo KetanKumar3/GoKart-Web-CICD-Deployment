@@ -17,29 +17,32 @@ pipeline {
             }
         }
 
-        stage('Inject ENV File') {
+        stage('Cleanup Docker') {
+            steps {
+                sh 'docker system prune -f'
+            }
+        }
+
+        stage('Inject backend ENV File') {
             steps {
                 withCredentials([file(credentialsId: 'backend-env', variable: 'ENV_FILE')]) {
-                    sh '''
-                        cp $ENV_FILE backend/.env
-                    '''
+                    sh 'cp $ENV_FILE backend/.env'
                 }
             }
         }
 
-        stage('Build Images') {
+        stage('Inject frontend ENV File') {
             steps {
-                echo "Building the image"
-                sh 'docker compose build'
-                echo "Build image successfully"
+                withCredentials([file(credentialsId: 'frontend-env', variable: 'ENV_FILE')]) {
+                    sh 'cp $ENV_FILE frontend/.env'
+                }
             }
         }
 
         stage('Deploy Containers') {
             steps {
-                echo "Deploying Start"
-                sh 'docker compose up -d'
-                echo "Deploying End"
+                echo "Deploying Application"
+                sh 'docker compose up -d --build'
             }
         }
     }
@@ -50,6 +53,9 @@ pipeline {
         }
         failure {
             echo 'Deployment Failed ❌'
+        }
+        always {
+            cleanWs()
         }
     }
 }

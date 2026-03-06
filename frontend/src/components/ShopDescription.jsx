@@ -7,7 +7,7 @@ const ShopDescription = () => {
   const [product, setProduct] = useState(null);
 
   const fetchProductDetails = async () => {
-    const res = await fetch(`http://localhost:3000/shop/${id}`);
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/shop/${id}`);
     const data = await res.json();
     setProduct(data.product);
   };

@@ -8,7 +8,7 @@ const UserProfile = () => {
 
   const fetchProfile = async () => {
     try {
-      const response = await fetch("http://localhost:3000/profile", {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/profile`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

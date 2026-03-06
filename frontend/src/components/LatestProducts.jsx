@@ -5,7 +5,7 @@ const LatestProducts = () => {
   const [products, setProducts] = useState([]);
 
   const fetchProduct = async () => {
-    const response = await fetch("http://localhost:3000/shop");
+    const response = await fetch(`${import.meta.env.VITE_API_URL}/shop`);
     const data = await response.json();
     const filterData = data.product.slice(0, 4);
     setProducts(filterData);

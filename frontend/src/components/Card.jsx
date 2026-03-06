@@ -10,7 +10,7 @@ const Card = ({ id, image, name, price, labels }) => {
 
         <div className="h-40 sm:h-48 flex justify-center items-center">
           <img
-            src={`http://localhost:3000/uploads/${image}`}
+            src={`${import.meta.env.VITE_API_URL}/uploads/${image}`}
             alt={name}
             className="w-24 sm:w-32 md:w-36 object-contain transition-transform duration-300 hover:scale-105"
           />
